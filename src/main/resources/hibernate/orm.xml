@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-mappings
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+        version="2.2">
+    <description>Testing orm xml</description>
+    <package>com.crud.project</package>
+
+    <entity class="com.crud.project.entity.Instructor" name="Instructor">
+        <table name="instructor"/>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY"/>
+            </id>
+            <basic name="firstName">
+                <column name="first_name"/>
+            </basic>
+            <basic name="lastName">
+                <column name="last_name"/>
+            </basic>
+            <basic name="email">
+                <column name="email"/>
+            </basic>
+            <one-to-many name="courses" target-entity="com.crud.project.entity.Course" mapped-by="instructor" fetch="LAZY">
+            </one-to-many>
+        </attributes>
+    </entity>
+    
+    <entity class="com.crud.project.entity.Course" name="Course">
+        <table name="course"/>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY"/>
+            </id>
+            <basic name="title">
+                <column name="title"/>
+            </basic>
+            <many-to-one name="instructor" fetch="LAZY">
+				<join-column name="instructor_id">
+				</join-column>			
+			</many-to-one>
+        </attributes>
+    </entity>
+</entity-mappings>
