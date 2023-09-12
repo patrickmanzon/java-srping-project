@@ -1,15 +1,15 @@
 package com.crud.project.service;
 
 import com.crud.project.dao.CustomUserDetails;
+import com.nimbusds.jwt.JWTClaimsSet;
 
-import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 
 public interface JwtService {
 
 	String extractUsername(String token);
 
-	Claims extractAllClaims(String token);
+	JWTClaimsSet extractAllClaims(String token);
 
     String generateToken(CustomUserDetails userDetails);
 
