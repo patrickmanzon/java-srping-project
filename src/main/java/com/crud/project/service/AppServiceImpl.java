@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.crud.project.entity.Course;
 import com.crud.project.entity.Instructor;
+import com.crud.project.graphql.FilterCommand;
+import com.crud.project.graphql.PaginateResult;
 import com.crud.project.interfaces.AppDAO;
 import com.crud.project.interfaces.AppService;
 
@@ -68,6 +70,12 @@ public class AppServiceImpl implements AppService{
 	@Transactional
 	public void deleteCourseById(int id) {
 		this.dao.deleteCourseById(id);
+	}
+
+	@Override
+	public PaginateResult getInstructorsWithFilter(FilterCommand filter) {
+		
+		return this.dao.getInstructorsWithFilter(filter);
 	}
 
 }

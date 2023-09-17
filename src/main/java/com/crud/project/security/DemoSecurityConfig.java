@@ -63,21 +63,21 @@ public class DemoSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.authorizeHttpRequests(configurer ->
-                    configurer
-                    		.requestMatchers(HttpMethod.POST, "/api/login").permitAll()
-                    		.requestMatchers(HttpMethod.GET, "/api/user").hasRole("EMPLOYEE")
-                            .requestMatchers(HttpMethod.GET, "/api/courses").hasRole("EMPLOYEE")
-                            .requestMatchers(HttpMethod.GET, "/api/courses/**").hasRole("EMPLOYEE")
-                            .requestMatchers(HttpMethod.GET, "/api/instructors").hasRole("EMPLOYEE")
-                            .requestMatchers(HttpMethod.GET, "/api/instructors/**").hasRole("EMPLOYEE")
-                            .requestMatchers(HttpMethod.POST, "/api/courses").hasRole("MANAGER")
-                            .requestMatchers(HttpMethod.POST, "/api/instructors").hasRole("MANAGER")
-                            .requestMatchers(HttpMethod.PUT, "/api/courses/**").hasRole("MANAGER")
-                            .requestMatchers(HttpMethod.PUT, "/api/instructors/**").hasRole("MANAGER")
-                            .requestMatchers(HttpMethod.DELETE, "/api/courses/**").hasRole("ADMIN")
-                            .requestMatchers(HttpMethod.DELETE, "/api/instructors/**").hasRole("ADMIN")
-        				);
+//        http.authorizeHttpRequests(configurer ->
+//                    configurer
+//                    		.requestMatchers(HttpMethod.POST, "/api/login").permitAll()
+//                    		.requestMatchers(HttpMethod.GET, "/api/user").hasRole("EMPLOYEE")
+//                            .requestMatchers(HttpMethod.GET, "/api/courses").hasRole("EMPLOYEE")
+//                            .requestMatchers(HttpMethod.GET, "/api/courses/**").hasRole("EMPLOYEE")
+//                            .requestMatchers(HttpMethod.GET, "/api/instructors").hasRole("EMPLOYEE")
+//                            .requestMatchers(HttpMethod.GET, "/api/instructors/**").hasRole("EMPLOYEE")
+//                            .requestMatchers(HttpMethod.POST, "/api/courses").hasRole("MANAGER")
+//                            .requestMatchers(HttpMethod.POST, "/api/instructors").hasRole("MANAGER")
+//                            .requestMatchers(HttpMethod.PUT, "/api/courses/**").hasRole("MANAGER")
+//                            .requestMatchers(HttpMethod.PUT, "/api/instructors/**").hasRole("MANAGER")
+//                            .requestMatchers(HttpMethod.DELETE, "/api/courses/**").hasRole("ADMIN")
+//                            .requestMatchers(HttpMethod.DELETE, "/api/instructors/**").hasRole("ADMIN")
+//        				);
 
         // use HTTP Basic authentication
 //        http.httpBasic(Customizer.withDefaults());

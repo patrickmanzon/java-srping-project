@@ -55,7 +55,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Service
 public class JwtServiceImpl implements JwtService {
-	private final String jwtSigningKey = "2b44b0b00fd822d8ce753e54dac3dc4e06c2725f7db930f3b9924468b53194dbccdbe23d7baa5ef5fbc414ca4b2e64700bad60c5a7c45eaba56880985582fba4";
+	private final String jwtSigningKey = "Tv8YKEtNorZj3KmGAMW5+xZxMMgAWz72YAyl+nyX9FQ=";
     private final String key;
 
     public JwtServiceImpl(@Value("${sample.secret-value}") String key) {

@@ -1,0 +1,47 @@
+type Query {
+  instructorById(id: ID!): Instructor
+  allInstructor: [Instructor]
+  courseById(id: ID!): Course
+  getGroupCommandInstructor(filter: FilterCommand): GroupCommandInstructor
+}
+
+type Mutation {
+  addInstructor(
+    firstName: String!
+    lastName: String!
+    email: String!
+  ): Instructor
+}
+
+type Instructor {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+}
+
+type Course {
+  id: ID!
+  title: String!
+}
+
+type GroupCommandInstructor {
+	type: String!
+	data: [Instructor]
+	perPage: Int
+	page: Int
+	lastPage: Int
+	total: Int
+} 
+
+
+input FilterCommand {
+	id: ID!
+	type: String!
+	keyword: String
+	perPage: Int
+	page: Int
+	lastPage: Int
+	total: Int
+}
+

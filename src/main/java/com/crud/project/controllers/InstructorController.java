@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.crud.project.entity.Instructor;
+import com.crud.project.graphql.ResponseGraphql;
 import com.crud.project.interfaces.AppDAO;
 import com.crud.project.interfaces.AppService;
 
@@ -106,6 +108,19 @@ public class InstructorController {
 		
 		return  new ResponseEntity<>(map, HttpStatus.CREATED);
 		
+	}
+	
+	@GetMapping("/test")
+	public ResponseGraphql getGroupCommandInstructor() {
+
+		List<Instructor> instructors = this.service.getAllInstructors();
+		
+		ResponseGraphql response = new ResponseGraphql();
+		
+		response.setData(instructors);
+		response.setType("test");
+		
+		return response;
 	}
 	
 	

@@ -9,10 +9,16 @@ import org.springframework.stereotype.Repository;
 import com.crud.project.entity.Course;
 import com.crud.project.entity.Instructor;
 import com.crud.project.exceptions.EntityNotFoundException;
+import com.crud.project.graphql.FilterCommand;
+import com.crud.project.graphql.PaginateResult;
 import com.crud.project.interfaces.AppDAO;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 
 
@@ -101,6 +107,37 @@ public class AppDAOImpl implements AppDAO{
 		}
 		
 		this.entityManager.remove(course);
+		
+	}
+
+	@Override
+	public PaginateResult getInstructorsWithFilter(FilterCommand filter) {
+		
+		Query queryCount = this.entityManager.createQuery("SELECT COUNT(i.id) FROM Instructor i", Instructor.class);
+		long countResult = (long) queryCount.getSingleResult();
+		
+		int perPage = filter.getPerPage();
+		int page = filter.getPage();
+		int pageNumber = (int) (page - 1) * perPage;
+		int lastPage = (int) ((countResult / page) + 1);
+		
+		TypedQuery<Instructor> query = this.entityManager
+				.createQuery("FROM Instructor", Instructor.class)
+				.setFirstResult(pageNumber)
+				.setMaxResults(perPage);
+		
+		PaginateResult pg = new PaginateResult();
+		
+		pg.setPage(page);
+		pg.setTotal((int)countResult);
+		pg.setData(query.getResultList());
+		pg.setPerPage(perPage);
+		pg.setTotal((int)countResult);
+		pg.setLastPage(lastPage);
+		pg.setType(filter.getType());
+		
+		return pg;
+		
 		
 	}
 
